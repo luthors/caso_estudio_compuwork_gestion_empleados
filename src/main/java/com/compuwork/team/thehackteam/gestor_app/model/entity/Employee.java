@@ -3,6 +3,7 @@ package com.compuwork.team.thehackteam.gestor_app.model.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -16,13 +17,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -62,9 +66,10 @@ public class Employee {
 	private Address address;
 	
 	@ManyToOne
-	@JoinColumn(name = "departament_id")
-	private Departament departament;
-	
+	@JoinColumn(name = "department_id", nullable = false)
+	@JsonBackReference
+	private Department department;
+
 	@OneToMany(mappedBy = "employee")
 	private List<PerformanceReport> performanceReports;
 		

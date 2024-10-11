@@ -1,19 +1,17 @@
 package com.compuwork.team.thehackteam.gestor_app.model.entity;
 
-import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Departament {
+public class Department {
 	 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +19,9 @@ public class Departament {
 	
 	@Column(name = "name", nullable = false)
 	private String name;
-	
-	@OneToMany(mappedBy = "departament")
+
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<Employee> employees;
 
 	@Column(name = "email", nullable = false)
