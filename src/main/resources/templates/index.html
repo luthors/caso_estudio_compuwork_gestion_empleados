@@ -38,6 +38,9 @@
 							<div class="container">
 								<a th:href="@{'/edit/' + ${empleado.id}}" class="btn btn-primary">Editar</a>
 								<a th:href="@{'/delete/' + ${empleado.id}}" class="btn btn-danger">Eliminar</a>
+								<a th:href="@{'/report-employee/' + ${empleado.id}}" class="btn btn-info">
+									<img th:src="@{images/reporte.png}" title="Ver reporte" alt="Ver reporte" style="width: 20px; height: 20px;">
+								</a>
 							</div> <!-- Fin del div container -->
 						</td>
 					</tr>

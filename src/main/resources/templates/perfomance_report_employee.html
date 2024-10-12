@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos/cabecero::cabecero-seccion(titulo='Reporte')}">
+</head>
+
+<body>
+    <!-- Contenedor Principal -->
+     <div th:replace="~{fragmentos/navegacion::navegacion-seccion}">
+       <div class="container">
+           <!-- Título del reporte -->
+           <div class="text-center mb-4">
+               <h2>Reporte de Desempeño</h2>
+           </div>
+   
+           <!-- Información del Empleado y Revisor -->
+           <div class="row mb-4">
+               <div class="col-md-6">
+                   <h4>Empleado</h4>
+                   <p><strong>Nombre:</strong> {{ employee.firstName }} {{ employee.lastName }}</p>
+                   <p><strong>Documento:</strong> {{ employee.idNumber }}</p>
+                   <p><strong>Departamento:</strong> {{ employee.department }}</p>
+               </div>
+               <div class="col-md-6">
+                   <h4>Revisor</h4>
+                   <p><strong>Nombre:</strong> {{ reviewer.firstName }} {{ reviewer.lastName }}</p>
+                   <p><strong>Fecha de Revisión:</strong> {{ creationDate }}</p>
+               </div>
+           </div>
+   
+           <!-- Comportamientos Evaluados -->
+           <div class="table-responsive">
+               <h4>Comportamientos Evaluados</h4>
+               <table class="table table-striped table-bordered">
+                   <thead>
+                       <tr>
+                           <th>Comportamiento</th>
+                           <th>Evaluación</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr th:each="behavior : ${behaviors}">
+                           <td th:text="${behavior.name}">Comportamiento</td>
+                           <td th:text="${behavior.rating}">Evaluación</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+   
+           <!-- Objetivos -->
+           <div class="table-responsive mt-4">
+               <h4>Objetivos</h4>
+               <table class="table table-striped table-bordered">
+                   <thead>
+                       <tr>
+                           <th>Objetivo</th>
+                           <th>Estado</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr th:each="goal : ${goals}">
+                           <td th:text="${goal.description}">Descripción del objetivo</td>
+                           <td th:text="${goal.status}">Estado</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+   
+           <!-- Comentarios -->
+           <div class="mt-4">
+               <h4>Comentarios</h4>
+               <ul class="list-group">
+                   <li class="list-group-item" th:each="comment : ${comments}" th:text="${comment.content}">Comentario</li>
+               </ul>
+           </div>
+       </div>
+     </div>
+</body>
+
+</html>

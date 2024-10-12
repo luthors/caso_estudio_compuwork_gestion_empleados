@@ -38,6 +38,13 @@ public class EmployeeController {
         return "add_employee";
     }
 
+    @GetMapping("/report-employee/{id}")
+    public String performanceReportEmployee(Model model, @PathVariable Long id) {
+        // model.addAttribute("employee",
+        //             employeeService.getEmployeeById(id));
+
+        return "perfomance_report_employee";
+    }
 
     @PostMapping("/add")
     public String saveEmployee(@ModelAttribute("employee") Employee employee, Long idDepartment){
