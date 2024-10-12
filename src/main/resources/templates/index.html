@@ -33,7 +33,7 @@
 						<td th:text="${empleado.lastName}"></td>
 						<td th:text="${empleado.idNumber}"></td>
 						<td th:text="${empleado.email}"></td>
-						<td th:text="${empleado.department.name}">
+						<td th:text="${empleado.department} ? ${empleado.department.name} : 'Sin Departamento'"></td>
 						<td class="text-center">
 							<div class="container">
 								<a th:href="@{'/edit/' + ${empleado.id}}" class="btn btn-primary">Editar</a>

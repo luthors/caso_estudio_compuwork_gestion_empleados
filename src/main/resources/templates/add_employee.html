@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{fragmentos/cabecero::cabecero-seccion(titulo='Agregar')}">
 </head>
+
 <body>
-<!--Div es del menu de navegacion-->
-<div th:replace="~{fragmentos/navegacion::navegacion-seccion}"/>
+	<!--Div es del menu de navegacion-->
+	<div th:replace="~{fragmentos/navegacion::navegacion-seccion}" />
 
-<div class="container">
-  <div class="container text-center" style="margin:30px">
-    <h3>Agregar Empleado</h3>
-  </div>
-  <div class="container">
-    <form action="/agregar" modelAttribute="contactoForma" method="post">
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control"
-               id="nombre" name="nombre" required="true">
-      </div>
-      <div class="mb-3">
-        <label for="celular" class="form-label">Celular</label>
-        <input type="text" class="form-control" id="celular" name="celular">
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email">
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-warning btn-sm me-3">Agregar</button>
-        <a href="/" class="btn btn-danger btn-sm">Regresar</a>
-      </div>
-    </form>
-  </div>
-</div>
+	<div class="container">
+		<div class="container text-center" style="margin:30px">
+			<h3>Agregar Empleado</h3>
+		</div>
 
-<div th:replace="~{fragmentos/pie-pagina::pie-pagina-seccion}"/>
+		<!-- Formulario para agregar un empleado modo oscuro-->
+		<div class="container text-white" style="background-color: #343a40; padding: 20px; border-radius: 10px;">
+
+			<form action="/add" modelAttribute="employeeForm" method="post">
+				<div class="row">
+					<div class="col">
+						<div class="mb-3">
+							<label for="firstName" class="form-label">Nombre</label>
+							<input type="text" class="form-control" id="firstName" name="firstName" required="true">
+						</div>
+						<div class="mb-3">
+							<label for="idNumber" class="form-label">Documento</label>
+							<input type="text" class="form-control" id="idNumber" name="idNumber">
+						</div>
+						<div class="mb-3">
+							<label for="email" class="form-label">Email</label>
+							<input type="email" class="form-control" id="email" name="email">
+						</div>
+						<-- sexo del empleado  complto -->
+						
+						
+						
+																
+											
+									
+								
+
+
+
+
+								<div class="mb-3">
+									<label for="firstName" class="form-label"></label>
+									<input type="text" class="form-control" id="firstName" name="firstName"
+										required="true">
+								</div>
+								<div class="mb-3">
+									<label for="lastName" class="form-label">Apellido</label>
+									<input type="text" class="form-control" id="lastName" name="lastName">
+								</div>
+							</div>
+
+							<div class="col">
+								<div class="mb-3">
+									<label for="lastName" class="form-label">Apellido</label>
+									<input type="text" class="form-control" id="lastName" name="lastName">
+								</div>
+								<div class="mb-3">
+									<label for="birthDate" class="form-label">Fecha de Nacimiento</label>
+									<input type="date" class="form-control" id="birthDate" name="birthDate">
+								</div>
+								<div class="mb-3">
+									<label for="healthInsurance" class="form-label">Seguridad Social - EPS</label>
+									<input type="text" class="form-control" id="healthInsurance" name="healthInsurance"
+										required="true">
+								</div>
+
+
+
+
+								<div class="mb-3">
+									<label for="department" class="form-label">Departamento</label>
+									<select class="form-select" id="department" name="department">
+										<option value="0">Sin Departamento</option>
+										<option th:each="departamento : ${departments}" th:value="${departamento.id}"
+											th:text="${departamento.name}"></option>
+									</select>
+								</div>
+
+								<div class="mb-3">
+									<label for="department" class="form-label">Salario</label>
+									<input type="text" class="form-control" id="salary" name="salary">
+
+								</div>
+
+
+							</div>
+
+
+							<div class="text-center">
+								<button type="submit" class="btn btn-warning btn-sm me-3">Agregar</button>
+								<a href="/" class="btn btn-danger btn-sm">Regresar</a>
+							</div>
+
+
+					</div>
+			</form>
+		</div>
+
+		<div th:replace="~{fragmentos/pie-pagina::pie-pagina-seccion}" />
 </body>
+
 </html>

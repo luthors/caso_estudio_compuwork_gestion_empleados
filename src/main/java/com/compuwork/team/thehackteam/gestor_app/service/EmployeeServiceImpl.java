@@ -1,6 +1,8 @@
 package com.compuwork.team.thehackteam.gestor_app.service;
 
+import com.compuwork.team.thehackteam.gestor_app.model.entity.Department;
 import com.compuwork.team.thehackteam.gestor_app.model.entity.Employee;
+import com.compuwork.team.thehackteam.gestor_app.repository.DeparmentRepository;
 import com.compuwork.team.thehackteam.gestor_app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ public class EmployeeServiceImpl  implements EmployeeService{
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    
+    @Autowired
+    private DeparmentRepository departmentRepository;
 
     @Override
     public List<Employee> getEmployees() {
@@ -24,8 +29,13 @@ public class EmployeeServiceImpl  implements EmployeeService{
     }
 
     @Override
-    public Employee saveEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public Employee saveEmployee(Employee employee, Long idDepartment) {
+		Department department = departmentRepository.findById(idDepartment).orElse(null);
+		if (department == null) {
+			throw new RuntimeException("Department not found");
+		}
+		employee.setDepartment(department);
+		return employeeRepository.save(employee);
     }
 
     @Override

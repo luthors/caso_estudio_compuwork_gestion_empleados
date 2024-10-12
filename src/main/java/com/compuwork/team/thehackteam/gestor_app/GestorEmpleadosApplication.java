@@ -1,7 +1,12 @@
 package com.compuwork.team.thehackteam.gestor_app;
 
+import com.compuwork.team.thehackteam.gestor_app.model.entity.Department;
 import com.compuwork.team.thehackteam.gestor_app.model.entity.Employee;
+import com.compuwork.team.thehackteam.gestor_app.model.entity.PermanentEmployee;
+import com.compuwork.team.thehackteam.gestor_app.repository.DeparmentRepository;
 import com.compuwork.team.thehackteam.gestor_app.repository.EmployeeRepository;
+import com.compuwork.team.thehackteam.gestor_app.service.EmployeeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,24 +22,15 @@ public class GestorEmpleadosApplication implements CommandLineRunner {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private DeparmentRepository departmentRepository;
+	
+	@Autowired
+	private EmployeeService employeeService;
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*Employee employee = new Employee();
-		employee.setRole("Software Developer");
-		employee.setSalary(1000d);
-		employee.setFirstName("Johwn");
-		employee.setLastName("Doe");
-		employee.setEmail("jhon_doe3w@mail.com");
-		employee.setPhoneNumber("1234567890");
-		employee.setDateOfBirth("01/01/1990");
-		employee.setEntryDate(Date.valueOf("2021-01-01"));
-		employee.setHealthInsurance("AXA");
-
-		employee.setIdNumber("123452367890");
-		employee.setSex("M");
-
-		employeeRepository.save(employee);
-*/
+				
 	}
 }

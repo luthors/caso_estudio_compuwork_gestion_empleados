@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -30,6 +31,14 @@ public class PerformanceReport {
 	@Column(name = "creation_date", nullable = false)
 	private Date creationDate;
 	
+	// un reporte de desempeño tiene un reviewer que es el encargado de revisar el reporte
+	// esta es una relacion donde un reviewer puede tener muchos reportes de desempeño
+	
+	@ManyToOne
+	@JoinColumn(name = "reviewer_id")
+	private Employee reviewer;
+	
+		
 	// un reporte de desempeño tiene una lista de objetivos que se deben cumplir, esta es una relacion
 	// de uno a muchos con la entidad Goal que se encarga de almacenar los objetivos
 	
@@ -42,6 +51,11 @@ public class PerformanceReport {
 	@OneToMany(mappedBy = "performanceReport")
 	private List<Comment> comments;
 	
+	// un reporte de desempeño tiene una lista de comportamientos que se califican, esta es una relacion
+	// de uno a muchos con la entidad Behavior que se encarga de almacenar los comportamientos
+	
+	@OneToMany(mappedBy = "performanceReport")
+	private List<Behavior> behaviors;
 	
 	
 	

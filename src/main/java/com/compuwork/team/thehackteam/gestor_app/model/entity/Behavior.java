@@ -1,8 +1,5 @@
 package com.compuwork.team.thehackteam.gestor_app.model.entity;
 
-import java.util.Date;
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,34 +7,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
 @Entity
-public class Goal {
-
-	// 5: Sobresaliente, 
-	// 4: Supera las expectativas, 
-	// 3: Cumple las expectativas, 
-	// 2: Necesita mejorar, 
-	// 1: Insatisfactorio
+public class Behavior {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@Column(nullable = false)
+	private String name;
+	
+	@Column(name = "score", nullable = false) // is float
+	private float score;
+	
+	//realacion con el reporte de desempeño
 	@ManyToOne
 	@JoinColumn(name = "performance_report_id")
 	private PerformanceReport performanceReport;
 	
-	@Column(name = "description", nullable = false)
-	private String description;
-	
-	@Column(name = "status", nullable = false)
-	private String status;
-	
-	@Column(name = "deadline", nullable = false)
-	private Date deadline;
 	
 }
