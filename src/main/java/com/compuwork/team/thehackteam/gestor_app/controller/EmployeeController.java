@@ -4,7 +4,10 @@ import com.compuwork.team.thehackteam.gestor_app.model.entity.Department;
 import com.compuwork.team.thehackteam.gestor_app.model.entity.Employee;
 import com.compuwork.team.thehackteam.gestor_app.model.entity.PermanentEmployee;
 import com.compuwork.team.thehackteam.gestor_app.repository.PermanentEmployeeRepository;
+import com.compuwork.team.thehackteam.gestor_app.service.BehaviorService;
 import com.compuwork.team.thehackteam.gestor_app.service.EmployeeService;
+import com.compuwork.team.thehackteam.gestor_app.service.GoalService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -25,6 +29,12 @@ public class EmployeeController {
 	
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private BehaviorService behaviorService;
+
+    @Autowired
+    private GoalService goalService;
     
     @GetMapping({"/", "/index", ""})
 	public String index(ModelMap model) {
@@ -39,9 +49,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/report-employee/{id}")
-    public String performanceReportEmployee(Model model, @PathVariable Long id) {
-        // model.addAttribute("employee",
-        //             employeeService.getEmployeeById(id));
+    public String performanceReportEmployee(ModelMap model, @PathVariable Long id) {
+        model.put("employee",
+                    employeeService.getEmployeeById(id));
+        model.put("behaviors", 
+            behaviorService.getBehaviorsByPerformanceReportId(id));
+        model.put("goals", 
+            goalService.getGoalsByPerformanceReportId(id));
 
         return "perfomance_report_employee";
     }
