@@ -50,6 +50,11 @@ public class EmployeeController {
 
     @GetMapping("/report-employee/{id}")
     public String performanceReportEmployee(ModelMap model, @PathVariable Long id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        Department department = employee.getDepartment();
+    
+        model.put("employee", employee);
+        model.put("departmentName", department.getName());
         model.put("employee",
                     employeeService.getEmployeeById(id));
         model.put("behaviors", 
