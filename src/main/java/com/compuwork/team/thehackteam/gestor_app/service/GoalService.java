@@ -21,32 +21,32 @@ public class GoalService {
         Goal goal1 = new Goal();
         goal1.setId(1L);
         goal1.setDescription("Aumentar las ventas en un 10%");
-        goal1.setStatus("3"); // Cumple las expectativas
-        goal1.setDeadline(new Date(System.currentTimeMillis() + 7776000000L)); // 90 días en el futuro
+        goal1.setStatus("Pendiente");
+        goal1.setDeadline(new Date(System.currentTimeMillis() + 7776000000L));
 
         Goal goal2 = new Goal();
         goal2.setId(2L);
         goal2.setDescription("Implementar nuevo sistema CRM");
-        goal2.setStatus("4"); // Supera las expectativas
-        goal2.setDeadline(new Date(System.currentTimeMillis() + 15552000000L)); // 180 días en el futuro
+        goal2.setStatus("Finalizado");
+        goal2.setDeadline(new Date(System.currentTimeMillis() + 15552000000L));
 
         Goal goal3 = new Goal();
         goal3.setId(3L);
         goal3.setDescription("Mejorar la satisfacción del cliente en un 15%");
-        goal3.setStatus("2"); // Necesita mejorar
-        goal3.setDeadline(new Date(System.currentTimeMillis() + 31536000000L)); // 365 días en el futuro
+        goal3.setStatus("Iniciado");
+        goal3.setDeadline(new Date(System.currentTimeMillis() + 31536000000L));
 
         Goal goal4 = new Goal();
         goal4.setId(4L);
         goal4.setDescription("Reducir los costos operativos en un 5%");
-        goal4.setStatus("5"); // Sobresaliente
-        goal4.setDeadline(new Date(System.currentTimeMillis() + 15552000000L)); // 180 días en el futuro
+        goal4.setStatus("Finalizado");
+        goal4.setDeadline(new Date(System.currentTimeMillis() + 15552000000L));
 
         Goal goal5 = new Goal();
         goal5.setId(5L);
         goal5.setDescription("Completar entrenamiento de liderazgo");
-        goal5.setStatus("3"); // Cumple las expectativas
-        goal5.setDeadline(new Date(System.currentTimeMillis() + 7776000000L)); // 90 días en el futuro
+        goal5.setStatus("En desarrollo");
+        goal5.setDeadline(new Date(System.currentTimeMillis() + 7776000000L));
 
         goals.add(goal1);
         goals.add(goal2);

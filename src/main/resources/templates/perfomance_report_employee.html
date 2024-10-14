@@ -1,79 +1,143 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head></head>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Desempeño</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212529;
+            color: #e9ecef;
+        }
+        .report-header {
+            background-color: #495057;
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        .report-body {
+            background-color: #343a40;
+            color: #e9ecef;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .info-card {
+            background-color: #495057;
+            border: 1px solid #6c757d;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .behavior-table, .table {
+            color: #e9ecef;
+        }
+        .behavior-table th, .behavior-table td,
+        .table th, .table td {
+            vertical-align: middle;
+            border-color: #6c757d;
+        }
+        .table-hover tbody tr:hover {
+            background-color: rgba(255,255,255,0.075);
+        }
+        .comment-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .list-group-item {
+            background-color: #495057;
+            color: #e9ecef;
+            border-color: #6c757d;
+        }
+        .table-primary, .table-success {
+            --bs-table-bg: #495057;
+            --bs-table-striped-bg: #495057;
+            --bs-table-striped-color: #e9ecef;
+            --bs-table-active-bg: #495057;
+            --bs-table-active-color: #e9ecef;
+            --bs-table-hover-bg: #52585f;
+            --bs-table-hover-color: #e9ecef;
+            color: #e9ecef;
+            border-color: #6c757d;
+        }
+    </style>
+</head>
 <body>
-  <!-- Contenedor Principal -->
- 
-  <div class="container">
-      <!-- Título del reporte -->
-      <div class="text-center mb-4">
-          <h2>Reporte de Desempeño</h2>
-      </div>
+    <div class="container mt-5 mb-5">
+        <div class="report-header text-center">
+            <h1 class="display-4">Reporte de Desempeño</h1>
+        </div>
+        <div class="report-body">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="info-card">
+                        <h3 class="mb-3">Empleado</h3>
+                        <p><strong>Nombre:</strong> <span th:text="${employee.firstName + ' ' + employee.lastName}"></span></p>
+                        <p><strong>Documento:</strong> <span th:text="${employee.idNumber}"></span></p>
+                        <p><strong>Departamento:</strong> <span th:text="${employee.department}"></span></p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="info-card">
+                        <h3 class="mb-3">Revisor</h3>
+                        <p><strong>Nombre:</strong> Pedro Páramo</p>
+                        <p><strong>Fecha de Revisión:</strong> 18/09/2024</p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="mb-4">
+                <h3 class="mb-3">Comportamientos Evaluados</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover behavior-table">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Comportamiento</th>
+                                <th>Evaluación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="behavior : ${behaviors}">
+                                <td th:text="${behavior.name}">Comportamiento</td>
+                                <td th:text="${behavior.score}">Evaluación</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-      <!-- Información del Empleado y Revisor -->
-      <div class="row mb-4">
-          <div class="col-md-6">
-              <h4>Empleado</h4>
-              <p><strong>Nombre:</strong> <span th:text="${employee.firstName + ' ' + employee.lastName}"></span></p>
-              <p><strong>Documento:</strong> <span th:text="${employee.idNumber}"></span></p>
-              <p><strong>Departamento:</strong> <span th:text="${employee.department}"></span></p>
-          </div>
-          <div class="col-md-6">
-              <h4>Revisor</h4>
-              <p><strong>Nombre:</strong> <span>Pedro Páramo</span></p>
-              <p><strong>Fecha de Revisión:</strong> <span>18/09/2024</span></p>
-          </div>
-      </div>
+            <div class="mb-4">
+                <h3 class="mb-3">Objetivos</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped table-dark">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Objetivo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="goal : ${goals}">
+                                <td th:text="${goal.description}">Descripción del objetivo</td>
+                                <td th:text="${goal.status}">Estado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-      <!-- Comportamientos Evaluados -->
-      <div class="table-responsive">
-          <h4>Comportamientos Evaluados</h4>
-          <table class="table table-striped table-bordered">
-              <thead>
-                  <tr>
-                      <th>Comportamiento</th>
-                      <th>Evaluación</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr th:each="behavior : ${behaviors}">
-                      <td th:text="${behavior.name}">Comportamiento</td>
-                      <td th:text="${behavior.score}">Evaluación</td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
+            <div>
+                <h3 class="mb-3">Comentarios</h3>
+                <ul class="list-group comment-list">
+                    <li class="list-group-item">Comentario 1</li>
+                    <li class="list-group-item">Comentario 2</li>
+                    <li class="list-group-item">Comentario 3</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-      <!-- Objetivos -->
-      <div class="table-responsive mt-4">
-          <h4>Objetivos</h4>
-          <table class="table table-striped table-bordered">
-              <thead>
-                  <tr>
-                      <th>Objetivo</th>
-                      <th>Estado</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr th:each="goal : ${goals}">
-                      <td th:text="${goal.description}">Descripción del objetivo</td>
-                      <td th:text="${goal.status}">Estado</td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-
-      <!-- Comentarios -->
-      <div class="mt-4">
-          <h4>Comentarios</h4>
-          <ul class="list-group">
-              <li class="list-group-item">Comentario</li>
-          </ul>
-      </div>
-  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
